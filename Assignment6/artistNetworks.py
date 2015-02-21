@@ -1,4 +1,6 @@
 import requests
+import pandas as pd
+import unicodedata
 
 def getRelatedArtists(artistID):
     """This function takes an artist ID as its only
@@ -44,6 +46,8 @@ def getDepthEdges(artistID, depth):
         
     return edgelist
 
+
+
 def getEdgeList(artistID, depth):
     """takes arguments artistID and depth and 
     returns the result as a Pandas DataFrame 
@@ -60,6 +64,7 @@ def getEdgeList(artistID, depth):
 
     return edgelist_df
 
+
         
 def writeEdgeList(artistID, depth, filename):
     """generates an edge list based on artstID and depth and 
@@ -68,104 +73,5 @@ def writeEdgeList(artistID, depth, filename):
 
     dataframe = getEdgeList(artistID, depth)
     csvfile = dataframe.to_csv(filename, index = False)
-
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    relatedartistIDs = []
-    list1 = []
-    list2 = []
-    list3 = []
-
-    if depth == 1:
-
-        url = 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists'
-        req = requests.get(url)
-        artistData = req.json()['artists']
-
-        for x in artistData:
-            artistID = x['id']
-            list1.append(artistID)
-
-    if depth == 2:
-
-        url = 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists'
-        req = requests.get(url)
-        artistData = req.json()['artists']
-
-        for x in artistData:
-            artist_id = x['id']
-            list1.append(artist_id)
-
-        for i in list1:
-            artistid = i
-            url = 'https://api.spotify.com/v1/artists/' + artistid + '/related-artists'
-            req = requests.get(url)
-            artistData = req.json()['artists']
-                
-            for x in artistData:
-                artist_id = x['id']
-                list2.append(artist_id)
-    
-    if depth == 3:
-        
-        url = 'https://api.spotify.com/v1/artists/' + artistID + '/related-artists'
-        req = requests.get(url)
-        artistData = req.json()['artists']
-
-        for x in artistData:
-            artist_id = x['id']
-            list1.append(artist_id)
-
-        for i in list1:
-            artistid = i
-            url = 'https://api.spotify.com/v1/artists/' + artistid + '/related-artists'
-            req = requests.get(url)
-            artistData = req.json()['artists']
-                
-            for x in artistData:
-                artist_id = x['id']
-                list2.append(artist_id)
-                
-        for i in list2:
-            artistid = i
-            url = 'https://api.spotify.com/v1/artists/' + artistid + '/related-artists'
-            req = requests.get(url)
-            artistData = req.json()['artists']
-                
-            for x in artistData:
-                artist_id = x['id']
-                list3.append(artist_id)
-            
-    for i in list1:
-    	tuple1 = (i)
-    	tuple1 = (tuple1 + i)
-
-    print tuple1
-
-
-
 
 
