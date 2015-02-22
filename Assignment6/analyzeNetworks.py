@@ -1,5 +1,6 @@
 import pandas as pd
 import networkx as nx
+import numpy
 
 def readEdgeList(filename):
     """reads an edgelist from a CSV with the filename, 
