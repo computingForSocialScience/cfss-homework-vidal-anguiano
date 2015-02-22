@@ -41,12 +41,34 @@ def combineEdgeLists(edgeList1, edgeList2):
     return dupremoved
 
 def pandasToNetworkX(edgeList):
-	"""Creates a NetworkX Digraph from an edge list in
-	a pandas data frame"""
+    """Creates a NetworkX Digraph from an edge list in
+    a pandas data frame"""
 
-	edgelist = readEdgeList(edgeList)
+    edgelist = readEdgeList(edgeList)
+    network = nx.DiGraph()
 
-	edgelist.to_records()
+    for col1,col2 in edgelist.to_records(index=False):
+        g.add_edge(col1,col2)
+
+    return network
+
+def randomCentralNode(inputDiGraph):
+
+    eigen = nx.eigenvector_centrality(inputDiGraph)
+    normalized = {}
+    listofkeys = eigen.keys()
+    sumofvalues = sum(eigen.values())
+
+    for x in listofkeys:
+        normalized[x] = float(eigen[x]/sumofvalues)
+    
+    randomnode = numpy.random.choice(normalized.keys(), p=normalized.values())
+    
+    return randomnode
+
+
+
+        
 
 
 
