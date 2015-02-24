@@ -52,12 +52,19 @@ while len(listof30artists) != 30:
 	listof30artists.append(artist)
 
 listof30albums = []
+singleslist = []
 
 for artist in listof30artists:
 	albums = fAl.fetchAlbumIds(artist)
-	if len(albums) == 1:
-		listof30albums.append(albums[0])
-	if len(albums) != 1:
+	if len(albums) == 0:
+		url = "https://api.spotify.com/v1/artists/" + artist + "/albums?&album_type=single"
+		req = requests.get(url)
+		singledata = req.json()['items']
+		for	x in singledata:
+			singleslist.append(x['id'])
+			random_single = np.random.choice(singleslist)
+			listof30albums.append(random_single)
+	else:
 		random_album = np.random.choice(albums)
 		listof30albums.append(random_album)
 
@@ -120,6 +127,7 @@ for x in range(len(listof30artists)):
 playlistDF = pd.DataFrame(playlist)
 
 playlistDF.to_csv("playlist.csv", index = False, encoding='utf-8')
+
 
 
 
