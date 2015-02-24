@@ -18,8 +18,8 @@ def fetchAlbumInfo(album_id):
     """Using the Spotify API, take an album ID 
     and return a dictionary with keys 'artist_id', 'album_id' 'name', 'year', popularity'
     """
-    url1 = 'https://api.spotify.com/v1/albums/' + album_id
-    req1 = requests.get(url)
+    url = 'https://api.spotify.com/v1/albums/' + album_id
+    req = requests.get(url)
     album = req.json()
 
     albuminfo = {}
