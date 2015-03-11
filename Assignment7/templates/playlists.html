@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>Playlists</title>
+</head>
+<body>
+
+	<table>
+		<tr>
+			<th>PlaylistId</th>
+			<th>rootArtist</th>
+		</tr>
+	{% for id,rootArtist in playlists %}
+		<tr>
+			<td> <a href="/playlist/{{ id }}"> {{ id }} </a> </td>
+			<td> <a href="/playlist/{{ id }}"> {{ rootArtist }} </a> </td>
+		</tr>
+	{% endfor %}
+	</table>
+</body>
+</html>
