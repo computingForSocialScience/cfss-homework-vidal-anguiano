@@ -14,17 +14,18 @@ db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8'
 
 cur = db.cursor()
 
+#This function fetches a list of tracks given an album id
 def fetchTracks(album_id):
     """Takes album_id and returns list of album's tracks"""
     url = "https://api.spotify.com/v1/albums/" + album_id + "/tracks"
     req = requests.get(url)
     trackdata = req.json()['items']
-
+    #create empty list
     listoftracks = []
-
+    #iterate over trackdata to pull out the track ids
     for track in trackdata:
         track_id = track['id']
-        listoftracks.append(track_id)
+        listoftracks.append(track_id) #append each track id to the empty list created before
     
     return listoftracks
 
@@ -206,7 +207,7 @@ def add_playlist():
     elif request.method == 'POST':
         # this code executes when someone fills out the form
         artistName = request.form['artistName']
-        # YOUR CODE HERE
+        createNewPlaylist(artistName)
         return(redirect("/playlists/"))
 
 
