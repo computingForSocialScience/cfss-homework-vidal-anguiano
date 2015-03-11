@@ -165,7 +165,22 @@ def make_index_resp():
 
 @app.route('/playlists/')
 def make_playlists_resp():
+    dbname="playlists"
+    host="localhost"
+    user="root"
+    passwd="V1DaL1T0"
+    db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8')
+
+    cur = db.cursor()
+    sql = '''
+        select id, rootArtist
+        from playlists
+        order by id'''
+
+    cur.execute(sql)
+    playlists = cur.fetchall()
     return render_template('playlists.html',playlists=playlists)
+
 
 
 @app.route('/playlist/<playlistId>')
