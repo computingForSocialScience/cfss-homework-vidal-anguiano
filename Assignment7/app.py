@@ -185,6 +185,16 @@ def make_playlists_resp():
 
 @app.route('/playlist/<playlistId>')
 def make_playlist_resp(playlistId):
+    dbname="playlists"
+    host="localhost"
+    user="root"
+    passwd="V1DaL1T0"
+    db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8')
+
+    cur = db.cursor()
+    sql = '''select songOrder, artistName, albumName, trackName from songs where playlistId=''' + str(playlistId) + ''' order by songOrder'''
+    cur.execute(sql)
+    songs = cur.fetchall()
     return render_template('playlist.html',songs=songs)
 
 
