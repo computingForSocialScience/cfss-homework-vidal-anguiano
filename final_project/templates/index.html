@@ -1,0 +1,13 @@
+<html>
+<head><title>Playlist app</title></head>
+<body>
+
+{% for uid, first_name, last_name in friend_attributes %}
+	<ul>
+
+		<li><a href="/profile/{{ uid }}">{{ first_name }} {{ last_name }}</a></li>
+	</ul>
+{% endfor %}
+
+</body>
+</html>

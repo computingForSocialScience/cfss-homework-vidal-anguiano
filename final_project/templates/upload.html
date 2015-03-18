@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Upload Friend Data</title>
+</head>
+<body>
+
+    <h2>Welcome! Ready to upload your Facebook friend data?</h2>
+    <form method="post" enctype='multipart/form-data' action="/" >
+        <label>
+            Upload your file called "friend_attributes.json":
+            <input type="file" name="attributes" />
+        </label>
+
+        <label>
+            Upload your file called "friend_edges.json":
+            <input type="file" name="edges" />
+        </label>
+
+        <input method='get' type="submit" value="Hack your friends!" name="submit" action="/" />
+
+
+    </form>
+
+
+</body>
+</html>
