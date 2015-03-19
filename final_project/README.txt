@@ -1,6 +1,8 @@
-Greetings!
+Greetings! 
 
-I hope to make this as simple to follow as possilbe.
+This project was completed by Vidal Anguiano and Diana Hou (cnetids: anguianov and dianahou).
+
+I hope to make this as simple to follow as possible.
 
 Progress status: We have completed all 7 parts of the facebook network analysis project.
 
@@ -11,7 +13,7 @@ Steps for setup(assuming all files are downloaded):
 4. To upload a set of files, first make sure to rename them to "edges.json" and "attributes.json" before uploading. Once you have renamed the files, go to "127.0.0.1:5000/upload" or whatever your local host address is, and:
 	1. Notice how it says "No files chosen" next to the "Choose File" button. Use the "Choose File" buttons to upload your "attributes.json" and "edges.json" files. Notice how your filenames have replaced "No files chosen".
 	2. Once files are selected, click "Upload Files". You will know files have been uploaded when the page refreshes and changes back to "No files chosen"
-	3. Finally, click "Create Tables" and wait to be redirected to a new page.
+	3. Finally, click "Create Tables" and wait to be redirected to a new page (May take a while depending on how many facebook friends you have).
 	4. Once you get to the "Congratulations!..." page, click "View Your Friend List" to be redirected to the full friends lists.
 5. You can now explore the new data files!
 
