@@ -4,38 +4,38 @@
 
     <table>
         <tr>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Last Name </th>
-            <th>Picture </th>
-            <th>Religion </th>
-            <th>Birthdate </th>
-            <th>Sex </th>
-            <th>Hometown </th>
-            <th>Current Location </th>
-            <th>Relationship Status </th>
-            <th>Significant Other ID </th>
-            <th>Political Views </th>
-            <th>Profile URL </th>
-            <th>Website </th>
+            <th bgcolor='808080'>Picture </th>
+            <th bgcolor='808080'>First Name</th>
+            <th bgcolor='808080'>Middle Name</th>
+            <th bgcolor='808080'>Last Name </th>
+            <th bgcolor='808080'>Religion </th>
+            <th bgcolor='808080'>Birthdate </th>
+            <th bgcolor='808080'>Sex </th>
+            <th bgcolor='808080'>Hometown </th>
+            <th bgcolor='808080'>Current Location </th>
+            <th bgcolor='808080'>Relationship Status </th>
+            <th bgcolor='808080'>Significant Other ID </th>
+            <th bgcolor='808080'>Political Views </th>
+            <th bgcolor='808080'>Profile URL </th>
+            <th bgcolor='808080'>Website </th>
            
         </tr>    
     {% for first_name, middle_name, last_name, pic, religion, birthday_date, sex, hometown_location, current_location, relationship_status, significant_other_id, political, profile_url, website in friend_attributes %}
         <tr>
-            <td> {{ first_name }} </td>
-            <td> {{ middle_name }} </td>
-            <td> {{ last_name }} </td>
-            <td> <img src="{{pic}}"> </td>
-            <td> {{ religion }} </td>
-            <td> {{ birthday_date }} </td>
-            <td> {{ sex }} </td>
-            <td> {{ hometown_location }} </td>
-            <td> {{ current_location }} </td>
-            <td> {{ relationship_status }} </td>
-            <td> {{ signficant_other_id }} </td>
-            <td> {{ political }} </td>
-            <td> <a href="{{ profile_url }}">Profile</a> </td>
-            <td> <a href="{{ website }}">Website</a> </td>
+            <td align='center' BGCOLOR="C0C0C0"> <img src="{{pic}}"> </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ first_name }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ middle_name }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ last_name }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ religion }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ birthday_date }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ sex }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ hometown_location }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ current_location }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ relationship_status }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ signficant_other_id }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> {{ political }} </td>
+            <td align='center' BGCOLOR="C0C0C0"> <a href="{{ profile_url }}">Profile</a> </td>
+            <td align='center' BGCOLOR="C0C0C0"> <a href="{{ website }}">Website</a> </td>
         </tr>
     {% endfor %}
     </table>
@@ -43,7 +43,10 @@
     <div class='matplotlib'>
         <img src="{{plotPng}}">
     </div>
-    
+
+    <div> Number of Mutual Friends: {{ friendscommon }} </div>
+
+
     {% for uid,name in uidNameList %}
         <ul>
             <li><a href="/profile/{{ uid }}">{{ name }}</a></li>

@@ -7,22 +7,22 @@
 <body>
 
     <h2>Welcome! Ready to upload your Facebook friend data?</h2>
-    <form method="post" enctype='multipart/form-data' action="/" >
+    <form method="post" enctype='multipart/form-data' action="" >
         <label>
-            Upload your file called "friend_attributes.json":
+            Upload your file called "attributes.json":
             <input type="file" name="attributes" />
         </label>
 
         <label>
-            Upload your file called "friend_edges.json":
+            Upload your file called "edges.json":
             <input type="file" name="edges" />
         </label>
 
-        <input method='get' type="submit" value="Hack your friends!" name="submit" action="/" />
-
-
+        <input method='get' type="submit" value="Upload Files" name="submit"/>
     </form>
-
+    <form action='/createtables'>
+        <input type='submit' value="Create Tables" />
+    </form>
 
 </body>
 </html>
