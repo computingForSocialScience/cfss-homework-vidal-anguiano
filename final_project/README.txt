@@ -2,6 +2,8 @@ Greetings!
 
 This project was completed by Vidal Anguiano and Diana Hou (cnetids: anguianov and dianahou).
 
+Vidal's Friend data are "friend_attributes.json" and "friend_edges.json" and Diana's data are "attributes.json" and "edges.json".
+
 I hope to make this as simple to follow as possible.
 
 Progress status: We have completed all 7 parts of the facebook network analysis project.
