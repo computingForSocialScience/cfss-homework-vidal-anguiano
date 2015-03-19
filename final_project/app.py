@@ -41,6 +41,7 @@ def visualizegraph(graph):
 		dir='static/temp',
 		suffix='.png',delete=False)
 	plt.savefig(f)
+	plt.clf()
 	fname = f.name
 	f.close()
 	return fname
@@ -60,7 +61,12 @@ def fetchuid(name):
 	cur.execute('''SELECT uid FROM friend_attributes WHERE name=''' + '''"''' + str(name) + '''"''')
 
 	uid = cur.fetchall()
-	return uid[0][0]
+
+	errorcode = 100
+	if uid:
+		return uid[0][0]
+	else:
+		return errorcode
 
 
 def constructGraph(friendName):
@@ -171,7 +177,7 @@ def createAttributesTable(json_file):
 	db.commit()
 
 
-UPLOAD_FOLDER = 'C:/cygwin64/home/Vidal/cfss/cfss-homework-vidal-anguiano/final_project/uploads'
+UPLOAD_FOLDER = 'C:/cygwin64/home/Vidal/cfss/cfss-homework-vidal-anguiano/final_project'
 ALLOWED_EXTENSIONS = set(['json'])
 
 app = Flask(__name__)
@@ -227,27 +233,12 @@ def make_friend_list(userid):
 	friendList = g.nodes()
 
 	friendList1 = []
-	finalfriendList = []
+	
 
 	#This loop changes unicode names to acsii
 	for named in friendList:
-		if named == str("Vidal Anguiano Jr."): #Takes Vidal's name out of the nodes list so that it does not show up on profile
-			continue
-		else:
-			friendList1.append(uni.normalize('NFKD', named).encode('ascii','ignore'))
+		friendList1.append(uni.normalize('NFKD', named).encode('ascii','ignore'))
 
-	#This loop creates a list which filters out names found in edges but not in friend_attributes
-	# for friend in friendList1:
-	# 	check = infriend_attributes(friend)
-	# 	if check == True:
-	# 		finalfriendList.append(friend)
-
-	# uidList = []
-	# for named in finalfriendList:
-	# 	uid = fetchuid(named)
-	# 	uidList.append(uid)
-
-	# uidNameList = zip(uidList, finalfriendList)
 
 	uidList = []
 	for named in friendList1:
@@ -256,11 +247,13 @@ def make_friend_list(userid):
 
 	uidNameList = zip(uidList, friendList1)
 
+	#Variable for counting mutual friends. I subtract 1 for user's own name.
+	friendscommon = len(friendList1) - 1
+	# Create png file 
 	fname = visualizegraph(g)
-	
 	plotPng = "/static/temp/" + str(os.path.split(fname)[-1])
 
-	return(render_template('profile.html',friend_attributes=friend_attributes,uidNameList=uidNameList,plotPng=plotPng))
+	return(render_template('profile.html',friendscommon=friendscommon,friend_attributes=friend_attributes,uidNameList=uidNameList,plotPng=plotPng))
 
 
 @app.route('/upload', methods=['GET','POST'])
@@ -276,28 +269,24 @@ def upload_file():
 			fileedge.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 	return render_template('upload.html')
 
+@app.route('/100')
+def error_page():
+	return render_template('error.html')
 
-#This is for the new pages that come after files have been uploaded DIDN'T FINISH
-# @app.route('/results', methods=['GET','POST'])
-# def make_index_resp():
-#     # this function just renders templates/index.html when
-#     # someone goes to http://127.0.0.1:5000/
-#     dbname="facebook"
-#     host="localhost"
-#     user="root"
-#     passwd="V1DaL1T0"
-#     db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8')
+@app.route('/createtables')
+def createtables():
+	dbname="facebook"
+	host="localhost"
+	user="root"
+	passwd="V1DaL1T0"
+	db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8')
 
-#     cur = db.cursor()
-#     sql = '''
-#         select uid, first_name, last_name
-#         from friend_attributes'''
-
-#     cur.execute(sql)
-
-#     friend_attributes = cur.fetchall()
-
-#     return(render_template('index.html',friend_attributes=friend_attributes))
+	cur = db.cursor()
+	sql = '''drop table if exists edges,friend_attributes;'''
+	cur.execute(sql)
+	createAttributesTable('attributes.json')
+	createEdgeTable('edges.json')
+	return render_template('tablescreated.html')
 
 if __name__ == '__main__':
 	app.debug=True
